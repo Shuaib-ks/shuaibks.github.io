@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shuaib K.S | ESP32 Drone Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+        
+        /* Animation for sections */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-animate {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        /* Active sidebar link */
+        .sidebar-link.active {
+            background-color: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+        }
+        
+        /* Project card hover effect */
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Custom drone animation */
+        @keyframes droneFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        
+        .drone-float {
+            animation: droneFloat 3s ease-in-out infinite;
+        }
+        
+        /* Joystick styling */
+        .joystick {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .joystick-knob {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-lg flex flex-col fixed h-full z-10">
+            <div class="p-6 flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold text-xl">SK</div>
+                <div>
+                    <h1 class="font-bold text-lg">Shuaib K.S</h1>
+                    <p class="text-sm text-gray-500">Tech Enthusiast</p>
+                </div>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto py-4">
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="index.html#home" class="sidebar-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-home mr-3 text-primary"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#about" class="sidebar-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-user mr-3 text-secondary"></i>
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#projects" class="sidebar-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-code mr-3 text-yellow-500"></i>
+                                <span>Projects</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#contact" class="sidebar-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-envelope mr-3 text-red-500"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex justify-center space-x-4">
+                    <a href="mailto:ksssshuaib@gmail.com" class="text-gray-500 hover:text-primary transition duration-200">
+                        <i class="fas fa-envelope text-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-blue-500 transition duration-200">
+                        <i class="fab fa-github text-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-blue-400 transition duration-200">
+                        <i class="fab fa-linkedin text-lg"></i>
+                    </a>
+                </div>
+                <p class="text-xs text-center text-gray-500 mt-2">© 2023 Shuaib K.S</p>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto ml-64">
+            <!-- Project Header -->
+            <section class="min-h-[50vh] flex items-center justify-center bg-gradient-to-br from-red-50 to-orange-50 px-8 py-16">
+                <div class="max-w-6xl mx-auto text-center section-animate">
+                    <div class="flex justify-center mb-8 drone-float">
+                        <i class="fas fa-drone-alt text-8xl text-red-500"></i>
+                    </div>
+                    <h1 class="text-5xl font-bold text-dark mb-6">ESP32 Drone & Controllers</h1>
+                    <h2 class="text-2xl text-gray-600 mb-8">Custom-built quadcopter with mobile app controller</h2>
+                    <div class="flex justify-center space-x-4">
+                        <a href="Drone.html#hardware" class="bg-red-500 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition duration-200 shadow-lg">
+                            Hardware Details
+                        </a>
+                        <a href="Drone.html#app" class="border-2 border-red-500 text-red-500 hover:bg-red-50 px-6 py-3 rounded-lg font-medium transition duration-200">
+                            Control App
+                        </a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Hardware Section -->
+            <section id="hardware" class="min-h-screen bg-white px-8 py-16">
+                <div class="max-w-6xl mx-auto section-animate">
+                    <h2 class="text-3xl font-bold text-center mb-12">Drone <span class="text-red-500">Hardware</span></h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1558002038-1055907df827?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Drone Hardware" class="rounded-xl shadow-xl w-full">
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4">Core Components</h3>
+                            <p class="text-gray-700 mb-6">
+                                The drone is built around the ESP32 NodeMCU32S microcontroller, providing both processing power and Wi-Fi connectivity. 
+                                It features four DC motors with fan-style propellers, controlled through transistors without traditional ESCs.
+                            </p>
+                            
+                            <div class="mb-8">
+                                <h4 class="text-xl font-medium mb-3 text-red-500">Technical Specifications</h4>
+                                <div class="space-y-4">
+                                    <div class="flex items-start">
+                                        <div class="bg-red-100 p-2 rounded-full mr-4">
+                                            <i class="fas fa-microchip text-red-500"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-medium">Controller</h5>
+                                            <p class="text-gray-600">ESP32 NodeMCU32S with Wi-Fi</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="bg-red-100 p-2 rounded-full mr-4">
+                                            <i class="fas fa-cogs text-red-500"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-medium">Motors</h5>
+                                            <p class="text-gray-600">4 × DC motors with propellers</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="bg-red-100 p-2 rounded-full mr-4">
+                                            <i class="fas fa-bolt text-red-500"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-medium">Power Protection</h5>
+                                            <p class="text-gray-600">4 diodes to prevent back current</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="bg-red-100 p-2 rounded-full mr-4">
+                                            <i class="fas fa-network-wired text-red-500"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-medium">Communication</h5>
+                                            <p class="text-gray-600">Wi-Fi with IP address (192.168.1.7)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-xl font-medium mb-3 text-red-500">Available Sensors</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">IR sensor</span>
+                                    <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">Ultrasonic sensor</span>
+                                    <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">Resistors</span>
+                                    <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">Basic electronics</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-16">
+                        <h3 class="text-2xl font-semibold mb-6 text-center">Wiring Diagram</h3>
+                        <div class="bg-gray-50 p-8 rounded-xl shadow-sm">
+                            <div class="flex justify-center">
+                                <div class="relative w-full max-w-2xl">
+                                    <!-- Simplified wiring diagram -->
+                                    <div class="bg-white p-6 rounded-lg shadow-md">
+                                        <div class="text-center mb-6">
+                                            <i class="fas fa-microchip text-4xl text-red-500 mb-2"></i>
+                                            <h4 class="font-bold">ESP32 NodeMCU32S</h4>
+                                        </div>
+                                        
+                                        <div class="grid grid-cols-4 gap-4 mb-6">
+                                            <!-- Motor connections -->
+                                            <div class="flex flex-col items-center">
+                                                <div class="w-8 h-8 bg-red-500 rounded-full mb-2"></div>
+                                                <div class="h-16 w-1 bg-gray-300"></div>
+                                                <div class="text-xs text-center">Motor 1</div>
+                                            </div>
+                                            <div class="flex flex-col items-center">
+                                                <div class="w-8 h-8 bg-red-500 rounded-full mb-2"></div>
+                                                <div class="h-16 w-1 bg-gray-300"></div>
+                                                <div class="text-xs text-center">Motor 2</div>
+                                            </div>
+                                            <div class="flex flex-col items-center">
+                                                <div class="w-8 h-8 bg-red-500 rounded-full mb-2"></div>
+                                                <div class="h-16 w-1 bg-gray-300"></div>
+                                                <div class="text-xs text-center">Motor 3</div>
+                                            </div>
+                                            <div class="flex flex-col items-center">
+                                                <div class="w-8 h-8 bg-red-500 rounded-full mb-2"></div>
+                                                <div class="h-16 w-1 bg-gray-300"></div>
+                                                <div class="text-xs text-center">Motor 4</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex justify-center space-x-8">
+                                            <div class="text-center">
+                                                <i class="fas fa-wifi text-2xl text-blue-500 mb-1"></i>
+                                                <div class="text-xs">Wi-Fi</div>
+                                            </div>
+                                            <div class="text-center">
+                                                <i class="fas fa-battery-three-quarters text-2xl text-green-500 mb-1"></i>
+                                                <div class="text-xs">Power</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- App Section -->
+            <section id="app" class="min-h-screen bg-gray-50 px-8 py-16">
+                <div class="max-w-6xl mx-auto section-animate">
+                    <h2 class="text-3xl font-bold text-center mb-12">Flutter <span class="text-blue-500">Control App</span></h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4">Mobile Controller</h3>
+                            <p class="text-gray-700 mb-6">
+                                The custom Flutter app provides intuitive control for the drone with dual on-screen joysticks. 
+                                It communicates wirelessly with the ESP32 over Wi-Fi, sending commands to the IP address 192.168.1.7.
+                            </p>
+                            
+                            <div class="space-y-6">
+                                <div>
+                                    <h4 class="text-xl font-medium mb-2 text-blue-500">Features</h4>
+                                    <ul class="space-y-2 text-gray-700">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+                                            <span>Dual-joystick control (throttle/yaw and pitch/roll)</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+                                            <span>Wi-Fi connectivity with configurable IP</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+                                            <span>Responsive UI with smooth animations</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check-circle text-blue-500 mt-1 mr-2"></i>
+                                            <span>Future plans for Tony Stark-style GUI</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="text-xl font-medium mb-2 text-blue-500">Technical Stack</h4>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Flutter</span>
+                                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Dart</span>
+                                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Wi-Fi</span>
+                                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">ESP32</span>
+                                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">UDP Protocol</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <!-- App UI Mockup -->
+                            <div class="relative mx-auto max-w-xs">
+                                <div class="bg-gray-800 rounded-3xl p-4 shadow-2xl">
+                                    <!-- Phone frame -->
+                                    <div class="bg-gray-900 rounded-2xl overflow-hidden">
+                                        <!-- App header -->
+                                        <div class="bg-blue-600 p-4 text-white text-center">
+                                            <h4 class="font-bold">Drone Controller</h4>
+                                            <p class="text-xs opacity-75">Connected to 192.168.1.7</p>
+                                        </div>
+                                        
+                                        <!-- Joysticks -->
+                                        <div class="p-6 grid grid-cols-2 gap-6">
+                                            <!-- Left joystick (throttle/yaw) -->
+                                            <div class="joystick rounded-full w-24 h-24 relative mx-auto flex items-center justify-center">
+                                                <div class="joystick-knob rounded-full w-12 h-12 absolute"></div>
+                                                <div class="absolute -bottom-6 text-xs text-center w-full text-gray-400">Throttle/Yaw</div>
+                                            </div>
+                                            
+                                            <!-- Right joystick (pitch/roll) -->
+                                            <div class="joystick rounded-full w-24 h-24 relative mx-auto flex items-center justify-center">
+                                                <div class="joystick-knob rounded-full w-12 h-12 absolute"></div>
+                                                <div class="absolute -bottom-6 text-xs text-center w-full text-gray-400">Pitch/Roll</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Status indicators -->
+                                        <div class="p-4 bg-gray-800 flex justify-between items-center">
+                                            <div class="text-xs text-green-400">
+                                                <i class="fas fa-wifi mr-1"></i> Connected
+                                            </div>
+                                            <div class="text-xs text-yellow-400">
+                                                <i class="fas fa-battery-three-quarters mr-1"></i> 78%
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-16">
+                        <h3 class="text-2xl font-semibold mb-6 text-center">Future <span class="text-blue-500">Enhancements</span></h3>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                                <div class="text-blue-500 text-3xl mb-4">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <h4 class="font-bold mb-2">Autonomous Flight</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Implementing basic autonomous flight patterns and obstacle avoidance using the available sensors.
+                                </p>
+                            </div>
+                            
+                            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                                <div class="text-blue-500 text-3xl mb-4">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                </div>
+                                <h4 class="font-bold mb-2">Performance Metrics</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Adding real-time telemetry display for battery life, signal strength, and flight metrics.
+                                </p>
+                            </div>
+                            
+                            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                                <div class="text-blue-500 text-3xl mb-4">
+                                    <i class="fas fa-gamepad"></i>
+                                </div>
+                                <h4 class="font-bold mb-2">Advanced Controls</h4>
+                                <p class="text-gray-600 text-sm">
+                                    Developing more sophisticated control schemes including gesture controls and voice commands.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Back to Projects -->
+            <section class="bg-white px-8 py-12">
+                <div class="max-w-6xl mx-auto text-center">
+                    <a href="index.html#projects" class="inline-flex items-center bg-primary hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-200 shadow-lg">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Back to All Projects
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Remove active class from all sidebar links
+                document.querySelectorAll('.sidebar-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add active class to sidebar link based on scroll position
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 300) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Add animation class when elements come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('section-animate');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

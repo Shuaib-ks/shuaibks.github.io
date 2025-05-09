@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shuaib K.S | IoT Control Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+                
+        /* Animation for sections */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+                
+        .section-animate {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+                
+        /* Active sidebar link */
+        .sidebar-link.active {
+            background-color: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+        }
+                
+        /* Project card hover effect */
+        .project-card {
+            transition: all 0.3s ease;
+        }
+                
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Feature highlight */
+        .feature-highlight {
+            position: relative;
+        }
+        .feature-highlight::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #3b82f6, #10b981);
+            border-radius: 2px;
+        }
+
+        /* Tech stack badges */
+        .tech-badge {
+            transition: all 0.2s ease;
+        }
+        .tech-badge:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-lg flex flex-col fixed h-full z-10">
+            <div class="p-6 flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold text-xl">SK</div>
+                <div>
+                    <h1 class="font-bold text-lg">Shuaib K.S</h1>
+                    <p class="text-sm text-gray-500">Tech Enthusiast</p>
+                </div>
+            </div>
+                        
+            <div class="flex-1 overflow-y-auto py-4">
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="index.html#home" class="sidebar-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-home mr-3 text-primary"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#about" class="sidebar-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-user mr-3 text-secondary"></i>
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#projects" class="sidebar-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-code mr-3 text-yellow-500"></i>
+                                <span>Projects</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#contact" class="sidebar-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-envelope mr-3 text-red-500"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+                        
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex justify-center space-x-4">
+                    <a href="mailto:ksssshuaib@gmail.com" class="text-gray-500 hover:text-primary transition duration-200">
+                        <i class="fas fa-envelope text-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-blue-500 transition duration-200">
+                        <i class="fab fa-github text-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-blue-400 transition duration-200">
+                        <i class="fab fa-linkedin text-lg"></i>
+                    </a>
+                </div>
+                <p class="text-xs text-center text-gray-500 mt-2">© 2023 Shuaib K.S</p>
+            </div>
+        </div>
+                
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto ml-64">
+            <!-- Project Header Section -->
+            <section id="project-header" class="min-h-[50vh] flex items-center justify-center bg-gradient-to-br from-green-50 to-teal-50 px-8 py-16">
+                <div class="max-w-6xl mx-auto text-center section-animate">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-green-100 text-green-800 mb-4">
+                        <i class="fas fa-project-diagram mr-2"></i>
+                        <span>IoT Control Projects</span>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-bold text-dark mb-6">Voice-Responsive IoT Systems</h1>
+                    <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                        Transforming my environment with voice commands and smart automation using Raspberry Pi, ESP32, and custom AI integration.
+                    </p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="Iot.html#project-details" class="bg-primary hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-200 shadow-lg">
+                            View Project Details
+                        </a>
+                        <a href="index.html#projects" class="border-2 border-primary text-primary hover:bg-blue-50 px-6 py-3 rounded-lg font-medium transition duration-200">
+                            Back to Projects
+                        </a>
+                    </div>
+                </div>
+            </section>
+                        
+            <!-- Project Details Section -->
+            <section id="project-details" class="py-16 px-8 bg-white">
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid md:grid-cols-3 gap-8 mb-16">
+                        <!-- Project Overview -->
+                        <div class="md:col-span-2">
+                            <h2 class="text-3xl font-bold mb-6 feature-highlight pl-4">Project Overview</h2>
+                            <p class="text-gray-700 mb-6 text-lg leading-relaxed">
+                                This isn't just another IoT project—it's my personal journey into creating an intelligent environment that responds to my voice and anticipates my needs. 
+                                What started as simple voice-controlled lights has evolved into a comprehensive IoT ecosystem that represents my vision for practical AI integration.
+                            </p>
+                            <p class="text-gray-700 mb-6 text-lg leading-relaxed">
+                                At 15 years old, I've built systems that most people wouldn't attempt—voice-controlled lighting, sensor-activated devices, and custom automation scripts 
+                                that make my space truly intelligent. This project is the foundation for my larger goal of creating a Jarvis-like AI assistant.
+                            </p>
+                        </div>
+                        
+                        <!-- Quick Stats -->
+                        <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-100 h-fit">
+                            <h3 class="text-xl font-semibold mb-4 text-primary">Project Stats</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-green-100 text-green-800 flex items-center justify-center mr-3">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                    <span><strong>Duration:</strong> 6 months (ongoing)</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center mr-3">
+                                        <i class="fas fa-microchip"></i>
+                                    </div>
+                                    <span><strong>Hardware:</strong> Raspberry Pi, ESP32, Sensors</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-800 flex items-center justify-center mr-3">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                    <span><strong>Languages:</strong> Python, C++, JavaScript</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-yellow-100 text-yellow-800 flex items-center justify-center mr-3">
+                                        <i class="fas fa-lightbulb"></i>
+                                    </div>
+                                    <span><strong>Devices:</strong> 12+ connected</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- The Breakthrough Moment -->
+                    <div class="mb-16">
+                        <h2 class="text-3xl font-bold mb-6 feature-highlight pl-4">The Breakthrough Moment</h2>
+                        <div class="bg-gradient-to-r from-blue-50 to-green-50 p-8 rounded-xl border-l-4 border-primary">
+                            <div class="flex items-start">
+                                <div class="text-4xl text-primary mr-4">💡</div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-3">When the Lights First Responded to My Voice</h3>
+                                    <p class="text-gray-700">
+                                        I'll never forget the moment I said "turn on the lights" and my LED strip actually turned on. It wasn't just about illumination—it was about 
+                                        proving that my ideas could manifest in the physical world. That simple command represented my first real control over my environment through 
+                                        intelligence rather than physical switches.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Technical Deep Dive -->
+                    <div class="mb-16">
+                        <h2 class="text-3xl font-bold mb-6 feature-highlight pl-4">Technical Implementation</h2>
+                        
+                        <div class="grid md:grid-cols-2 gap-8 mb-8">
+                            <!-- System Architecture -->
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center mr-3">
+                                        <i class="fas fa-sitemap"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold">System Architecture</h3>
+                                </div>
+                                <p class="text-gray-700 mb-4">
+                                    The system uses a Raspberry Pi as the central hub running my G1 assistant, with ESP32 microcontrollers handling device control. 
+                                    Voice commands are processed through Whisper.cpp for speech recognition, then routed to appropriate Python control scripts.
+                                </p>
+                                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                     alt="IoT Architecture" class="w-full rounded-lg mt-4">
+                            </div>
+                            
+                            <!-- Tech Stack -->
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 rounded-full bg-green-100 text-green-800 flex items-center justify-center mr-3">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold">Technology Stack</h3>
+                                </div>
+                                <div class="flex flex-wrap gap-3 mb-4">
+                                    <span class="tech-badge bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center">
+                                        <i class="fab fa-raspberry-pi mr-1"></i> Raspberry Pi
+                                    </span>
+                                    <span class="tech-badge bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm flex items-center">
+                                        <i classfas fa-microchip mr-1"></i> ESP32
+                                    </span>
+                                    <span class="tech-badge bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm flex items-center">
+                                        <i class="fab fa-python mr-1"></i> Python
+                                    </span>
+                                    <span class="tech-badge bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm flex items-center">
+                                        <i class="fas fa-wifi mr-1"></i> MQTT
+                                    </span>
+                                    <span class="tech-badge bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm flex items-center">
+                                        <i class="fas fa-robot mr-1"></i> Whisper.cpp
+                                    </span>
+                                    <span class="tech-badge bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm flex items-center">
+                                        <i class="fas fa-plug mr-1"></i> GPIO
+                                    </span>
+                                </div>
+                                <p class="text-gray-700">
+                                    The system integrates multiple technologies: Raspberry Pi for processing, ESP32 for device control, Python for scripting, MQTT for communication, 
+                                    and custom voice recognition. All built with minimal resources but maximum innovation.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Features -->
+                        <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                            <h3 class="text-2xl font-semibold mb-4 text-primary">Key Features</h3>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="flex items-start">
+                                    <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-4 mt-1">
+                                        <i class="fas fa-microphone text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-lg mb-1">Voice Control</h4>
+                                        <p class="text-gray-700">Natural language commands to control lights, fans, and other devices using my G1 assistant.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-green-500 bg-opacity-10 p-2 rounded-full mr-4 mt-1">
+                                        <i class="fas fa-motion text-green-500"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-lg mb-1">Motion Sensing</h4>
+                                        <p class="text-gray-700">PIR sensors detect movement to trigger lights or security alerts automatically.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-purple-500 bg-opacity-10 p-2 rounded-full mr-4 mt-1">
+                                        <i class="fas fa-route text-purple-500"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-lg mb-1">Automation Rules</h4>
+                                        <p class="text-gray-700">Custom scripts that trigger actions based on time, presence, or environmental factors.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-yellow-500 bg-opacity-10 p-2 rounded-full mr-4 mt-1">
+                                        <i class="fas fa-mobile-alt text-yellow-500"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-lg mb-1">Mobile Control</h4>
+                                        <p class="text-gray-700">Remote access and control through a custom Flutter app when away from home.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Why It Matters -->
+                    <div class="mb-16">
+                        <h2 class="text-3xl font-bold mb-6 feature-highlight pl-4">Why This Project Matters</h2>
+                        
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <!-- Milestone Card -->
+                            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-l-4 border-primary">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center mr-3">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold">Personal Milestone</h3>
+                                </div>
+                                <p class="text-gray-700">
+                                    As my first successful IoT project, this represents the moment I realized I could bridge the digital and physical worlds. 
+                                    The confidence boost from making lights respond to my voice propelled me to tackle more ambitious projects.
+                                </p>
+                            </div>
+                            
+                            <!-- Foundation Card -->
+                            <div class="bg-gradient-to-br from-green-50 to-teal-50 p-6 rounded-xl border-l-4 border-green-500">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center mr-3">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold">Foundation for G1</h3>
+                                </div>
+                                <p class="text-gray-700">
+                                    These IoT systems form the physical interaction layer for my G1 AI assistant. Every device I connect teaches me more about creating 
+                                    seamless human-AI-environment interaction—essential for my Jarvis-like vision.
+                                </p>
+                            </div>
+                            
+                            <!-- Proof Card -->
+                            <div class="bg-gradient-to-br from-purple-50 to-indigo-50 p-6 rounded-xl border-l-4 border-purple-500">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center mr-3">
+                                        <i class="fas fa-lightbulb"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold">Proof of Concept</h3>
+                                </div>
+                                <p class="text-gray-700">
+                                    This project proves that with enough determination, even complex systems can be built with limited resources. It's evidence that my 
+                                    bigger dreams—like becoming Google's CEO—are within reach if I continue pushing boundaries.
+                                </p>
+                            </div>
+                            
+                            <!-- Control Card -->
+                            <div class="bg-gradient-to-br from-yellow-50 to-amber-50 p-6 rounded-xl border-l-4 border-yellow-500">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 rounded-full bg-yellow-500 text-white flex items-center justify-center mr-3">
+                                        <i class="fas fa-sliders-h"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold">Control Over Environment</h3>
+                                </div>
+                                <p class="text-gray-700">
+                                    Beyond technical skills, this project represents my first real control over my surroundings through code. The ability to shape my 
+                                    environment to my needs is powerful—especially as a 15-year-old building everything myself.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Gallery -->
+                    <div class="mb-16">
+                        <h2 class="text-3xl font-bold mb-6 feature-highlight pl-4">Project Gallery</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="rounded-xl overflow-hidden shadow-md">
+                                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                     alt="IoT Setup" class="w-full h-48 object-cover">
+                                <div class="p-4 bg-white">
+                                    <p class="text-sm text-gray-600">My Raspberry Pi control center with connected devices</p>
+                                </div>
+                            </div>
+                            <div class="rounded-xl overflow-hidden shadow-md">
+                                <img src="Voice controlled LED.jfif"
+                                     alt="LED Lights" class="w-full h-48 object-cover">
+                                <div class="p-4 bg-white">
+                                    <p class="text-sm text-gray-600">Voice-controlled LED lighting system in action</p>
+                                </div>
+                            </div>
+                            <div class="rounded-xl overflow-hidden shadow-md">
+                                <img src="Circuits.jfif"
+                                     alt="Circuit Board" class="w-full h-48 object-cover">
+                                <div class="p-4 bg-white">
+                                    <p class="text-sm text-gray-600">Custom circuit boards for device control</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Future Plans -->
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-xl mb-16">
+                        <h2 class="text-3xl font-bold mb-6 feature-highlight pl-4">Future Development</h2>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="text-xl font-semibold mb-3 text-primary">Expansion Plans</h3>
+                                <ul class="space-y-3 text-gray-700">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-arrow-right text-primary mt-1 mr-2"></i>
+                                        <span>Integrate more environmental sensors (temperature, humidity, air quality)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-arrow-right text-primary mt-1 mr-2"></i>
+                                        <span>Add facial recognition for personalized room settings</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-arrow-right text-primary mt-1 mr-2"></i>
+                                        <span>Develop predictive automation using machine learning</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-arrow-right text-primary mt-1 mr-2"></i>
+                                        <span>Create a unified dashboard for all connected devices</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-3 text-primary">Long-Term Vision</h3>
+                                <p class="text-gray-700">
+                                    This IoT ecosystem will become the physical interface layer for my G1 AI assistant, evolving into a comprehensive smart environment 
+                                    that anticipates needs and adapts to preferences. It's the first step toward my goal of building truly intelligent spaces that 
+                                    enhance daily life through seamless technology integration.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Back to Projects -->
+                    <div class="text-center">
+                        <a href="index.html#projects" class="inline-flex items-center px-6 py-3 bg-primary hover:bg-blue-700 text-white rounded-lg font-medium transition duration-200 shadow-lg">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Back to All Projects
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Remove active class from all sidebar links
+                document.querySelectorAll('.sidebar-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+                
+        // Add active class to sidebar link based on scroll position
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            let currentSection = '';
+                    
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 300) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+                    
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+                
+        // Add animation class when elements come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('section-animate');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+                
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Highlight current project in sidebar
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectsLink = document.querySelector('a[href="index.html#projects"]');
+            if (projectsLink) {
+                projectsLink.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

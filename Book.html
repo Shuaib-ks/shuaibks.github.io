@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Generator App | Shuaib K.S</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+                
+        /* Animation for sections */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+                
+        .section-animate {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+                
+        /* Active sidebar link */
+        .sidebar-link.active {
+            background-color: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+        }
+                
+        /* Project card hover effect */
+        .project-card {
+            transition: all 0.3s ease;
+        }
+                
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Feature card styling */
+        .feature-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .feature-card:hover {
+            border-left-color: #3b82f6;
+            transform: translateX(5px);
+        }
+
+        /* Screenshot gallery */
+        .screenshot {
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .screenshot:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-lg flex flex-col fixed h-full z-10">
+            <div class="p-6 flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold text-xl">SK</div>
+                <div>
+                    <h1 class="font-bold text-lg">Shuaib K.S</h1>
+                    <p class="text-sm text-gray-500">Tech Enthusiast</p>
+                </div>
+            </div>
+                        
+            <div class="flex-1 overflow-y-auto py-4">
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="index.html#home" class="sidebar-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-home mr-3 text-primary"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#about" class="sidebar-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-user mr-3 text-secondary"></i>
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#projects" class="sidebar-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-code mr-3 text-yellow-500"></i>
+                                <span>Projects</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#contact" class="sidebar-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 transition duration-200">
+                                <i class="fas fa-envelope mr-3 text-red-500"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+                        
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex justify-center space-x-4">
+                    <a href="mailto:ksssshuaib@gmail.com" class="text-gray-500 hover:text-primary transition duration-200">
+                        <i class="fas fa-envelope text-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-blue-500 transition duration-200">
+                        <i class="fab fa-github text-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-blue-400 transition duration-200">
+                        <i class="fab fa-linkedin text-lg"></i>
+                    </a>
+                </div>
+                <p class="text-xs text-center text-gray-500 mt-2">© 2023 Shuaib K.S</p>
+            </div>
+        </div>
+                
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto ml-64">
+            <!-- Project Hero Section -->
+            <section class="min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-pink-50 to-rose-50 px-8 py-16">
+                <div class="max-w-6xl mx-auto text-center section-animate">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-pink-100 text-pink-800 mb-4">
+                        <i class="fas fa-book-open mr-2"></i>
+                        <span>AI Project</span>
+                    </div>
+                    <h1 class="text-5xl font-bold text-dark mb-6">Book Generator <span class="text-pink-600">App</span></h1>
+                    <h2 class="text-2xl text-gray-600 mb-8">AI-powered custom textbook generator for education and creative purposes</h2>
+                    <div class="flex justify-center space-x-4">
+                        <a href="Book.html#demo" class="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 rounded-lg font-medium transition duration-200 shadow-lg">
+                            <i class="fas fa-play-circle mr-2"></i> Live Demo
+                        </a>
+                        <a href="Book.html#features" class="border-2 border-pink-600 text-pink-600 hover:bg-pink-50 px-6 py-3 rounded-lg font-medium transition duration-200">
+                            <i class="fas fa-list-ul mr-2"></i> Features
+                        </a>
+                    </div>
+                </div>
+            </section>
+                        
+            <!-- Project Overview Section -->
+            <section id="overview" class="py-16 bg-white px-8">
+                <div class="max-w-6xl mx-auto section-animate">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold mb-4">Project <span class="text-primary">Overview</span></h2>
+                        <div class="w-24 h-1 bg-gradient-to-r from-primary to-pink-600 mx-auto mb-6"></div>
+                        <p class="text-gray-600 max-w-3xl mx-auto">
+                            The Book Generator App is a smart, well-designed application that automatically creates books for educational or creative purposes. 
+                            It uses AI to generate structured content based on user inputs, providing a seamless experience for creating custom textbooks, guides, or creative works.
+                        </p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-gray-50 p-6 rounded-xl feature-card">
+                            <div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-mobile-alt text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Modern UI</h3>
+                            <p class="text-gray-600">
+                                Clean, minimalist design with a black and white color scheme and soft, readable fonts. 
+                                Features rounded cards and intuitive navigation.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-6 rounded-xl feature-card">
+                            <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-brain text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">AI-Powered</h3>
+                            <p class="text-gray-600">
+                                Leverages advanced AI models (GPT/Gemini) to generate coherent, structured content with introductions, chapters, examples, and summaries.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-6 rounded-xl feature-card">
+                            <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-cogs text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Flexible Output</h3>
+                            <p class="text-gray-600">
+                                Generates books in various formats including PDF, TXT, and stores them in a local SQLite database for easy access and management.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+                        
+            <!-- Features Section -->
+            <section id="features" class="py-16 bg-gray-50 px-8">
+                <div class="max-w-6xl mx-auto section-animate">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold mb-4">Key <span class="text-primary">Features</span></h2>
+                        <div class="w-24 h-1 bg-gradient-to-r from-primary to-pink-600 mx-auto mb-6"></div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-xl shadow-sm feature-card">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <span class="w-8 h-8 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-keyboard"></i>
+                                </span>
+                                Intuitive Input System
+                            </h3>
+                            <ul class="space-y-2 text-gray-600 pl-11">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Two main input fields: Topic/Title and Level/Purpose</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Dropdown selectors for book type and complexity</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Real-time input validation and suggestions</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-sm feature-card">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-book"></i>
+                                </span>
+                                Structured Content Generation
+                            </h3>
+                            <ul class="space-y-2 text-gray-600 pl-11">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Automatically generates introduction and conclusion</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Creates chapters with logical subheadings</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Includes examples, diagrams (when applicable), and glossary</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-sm feature-card">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <span class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-database"></i>
+                                </span>
+                                Content Management
+                            </h3>
+                            <ul class="space-y-2 text-gray-600 pl-11">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Local storage of generated books in SQLite database</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Export options to PDF, TXT, and other formats</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Library view to browse and manage created books</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-sm feature-card">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <span class="w-8 h-8 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-user-edit"></i>
+                                </span>
+                                Customization Options
+                            </h3>
+                            <ul class="space-y-2 text-gray-600 pl-11">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Edit generated content before finalizing</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Regenerate specific chapters or sections</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>Adjust tone, complexity, and length settings</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+                        
+            <!-- Technology Stack Section -->
+            <section id="technology" class="py-16 bg-white px-8">
+                <div class="max-w-6xl mx-auto section-animate">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold mb-4">Technology <span class="text-primary">Stack</span></h2>
+                        <div class="w-24 h-1 bg-gradient-to-r from-primary to-pink-600 mx-auto mb-6"></div>
+                        <p class="text-gray-600 max-w-3xl mx-auto">
+                            The Book Generator App combines modern frontend technologies with powerful backend AI to deliver a seamless user experience.
+                        </p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-6 text-center md:text-left">Frontend (User Interface)</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center bg-gray-50 p-4 rounded-lg">
+                                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fab fa-flutter"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">Flutter Framework</h4>
+                                        <p class="text-sm text-gray-600">For cross-platform compatibility and clean UI</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center bg-gray-50 p-4 rounded-lg">
+                                    <div class="w-10 h-10 bg-red-100 text-red-600 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">Material Design</h4>
+                                        <p class="text-sm text-gray-600">Modern UI components and interactions</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center bg-gray-50 p-4 rounded-lg">
+                                    <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-network-wired"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">REST API</h4>
+                                        <p class="text-sm text-gray-600">For communication with backend services</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-6 text-center md:text-left">Backend (Logic & AI)</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center bg-gray-50 p-4 rounded-lg">
+                                    <div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-brain"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">Gemini AI / GPT</h4>
+                                        <p class="text-sm text-gray-600">For content generation and structuring</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center bg-gray-50 p-4 rounded-lg">
+                                    <div class="w-10 h-10 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-database"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">SQLite</h4>
+                                        <p class="text-sm text-gray-600">Local database for storing generated books</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center bg-gray-50 p-4 rounded-lg">
+                                    <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">PDF Generation</h4>
+                                        <p class="text-sm text-gray-600">For exporting books in printable formats</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 bg-gradient-to-r from-blue-50 to-pink-50 p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-4 text-center">Development Highlights</h3>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-white p-4 rounded-lg text-center">
+                                <div class="text-3xl font-bold text-primary mb-2">100%</div>
+                                <div class="text-gray-600">Cross-platform</div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg text-center">
+                                <div class="text-3xl font-bold text-primary mb-2">500ms</div>
+                                <div class="text-gray-600">Average generation time</div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg text-center">
+                                <div class="text-3xl font-bold text-primary mb-2">10+</div>
+                                <div class="text-gray-600">Supported book types</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+                        
+            <!-- Screenshots Section -->
+            <section id="screenshots" class="py-16 bg-gray-50 px-8">
+                <div class="max-w-6xl mx-auto section-animate">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold mb-4">App <span class="text-primary">Screenshots</span></h2>
+                        <div class="w-24 h-1 bg-gradient-to-r from-primary to-pink-600 mx-auto mb-6"></div>
+                        <p class="text-gray-600 max-w-3xl mx-auto">
+                            Explore the clean, intuitive interface of the Book Generator App through these screenshots.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Main Screen" class="screenshot">
+                        <img src="https://images.unsplash.com/photo-1589998059171-988d322dfad6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Input Screen" class="screenshot">
+                        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1073&q=80" alt="Generation Progress" class="screenshot">
+                        <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1088&q=80" alt="Book Preview" class="screenshot">
+                        <img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Chapter View" class="screenshot">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Library View" class="screenshot">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Export Options" class="screenshot">
+                        <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Settings" class="screenshot">
+                    </div>
+                </div>
+            </section>
+                        
+            <!-- Demo Section -->
+            <section id="demo" class="py-16 bg-gradient-to-br from-blue-50 to-pink-50 px-8">
+                <div class="max-w-6xl mx-auto section-animate">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold mb-4">Live <span class="text-primary">Demo</span></h2>
+                        <div class="w-24 h-1 bg-gradient-to-r from-primary to-pink-600 mx-auto mb-6"></div>
+                        <p class="text-gray-600 max-w-3xl mx-auto">
+                            Try out the Book Generator App with this interactive demo. See how quickly you can create a custom textbook!
+                        </p>
+                    </div>
+                    
+                    
+                    
+                    <div class="mt-12 text-center">
+                        <div class="flex justify-center space-x-4">
+                            <a href="https://github.com/Shuaib-ks/Writo-AI"     class="bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-lg font-medium transition duration-200 flex items-center">
+                                <i class="fab fa-github mr-2"></i> GitHub Repository
+                            </a>
+                            <a href="https://www.mediafire.com/file/wbo6gsonlg6es6p/Writo_AI.apk/file"  class="border-2 border-pink-600 text-pink-600 hover:bg-pink-50 px-6 py-3 rounded-lg font-medium transition duration-200 flex items-center">
+                                <i class="fas fa-envelope mr-2"></i> Request APK
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+                        
+            <!-- Back to Projects -->
+            <section class="py-12 bg-white px-8">
+                <div class="max-w-6xl mx-auto text-center">
+                    <a href="index.html#projects" class="inline-flex items-center text-primary hover:text-blue-700 transition duration-200">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        <span>Back to All Projects</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Remove active class from all sidebar links
+                document.querySelectorAll('.sidebar-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add active class to sidebar link based on scroll position
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 300) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Add animation class when elements come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('section-animate');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
