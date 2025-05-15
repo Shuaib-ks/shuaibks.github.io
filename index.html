@@ -67,7 +67,7 @@
 <body class="bg-light text-dark font-sans">
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
-        <div class="w-64 bg-white shadow-lg flex flex-col fixed h-full z-10">
+        <div class="w-64 bg-white shadow-lg flex flex-col fixed h-full z-10 hidden md:flex">
             <div class="p-6 flex items-center space-x-3">
                 <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white font-bold text-xl">SK</div>
                 <div>
@@ -76,7 +76,7 @@
                 </div>
             </div>
             
-            <div class="flex-1 overflow-y-auto py-4">
+            <div class="flex-1 overflow-y-auto md:ml-0">
                 <nav>
                     <ul>
                         <li>
@@ -259,35 +259,38 @@
                             </div>
                         </button>
                         <!-- Project 2 -->
-                        <div class="project-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300">
-                            <div class="h-48 bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center">
-                                <i class="fas fa-globe text-white text-6xl"></i>
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2">Gemini-Powered Voice Assistant</h3>
-                                <p class="text-gray-600 mb-4">Web-based teacher-like voice assistant powered by Gemini AI.</p>
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Flask</span>
-                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Gemini AI</span>
-                                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">SQLite</span>
-                                    <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">Web</span>
+                        <button type="button" onclick="window.location.href='Compiler.html'">
+                            <div class="project-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                                <div class="h-48 bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center">
+                                    <i class="fas fa-code text-white text-6xl"></i>
                                 </div>
-                                <ul class="text-sm text-gray-700 space-y-1">
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
-                                        <span>Contextual conversations</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
-                                        <span>Lesson mode for education</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
-                                        <span>Planned monetization features</span>
-                                    </li>
-                                </ul>
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold mb-2">MiniLang Compiler</h3>
+                                    <p class="text-gray-600 mb-4">A lightweight, custom-built compiler designed for MiniLang — a simple programming language.</p>
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Python</span>
+                                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Parsing</span>
+                                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Code Generation</span>
+                                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">Compiler Design</span>
+                                    </div>
+                                    <ul class="text-sm text-gray-700 space-y-1">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                            <span>Lexical analysis and parsing of MiniLang syntax</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                            <span>Generates efficient intermediate code</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                            <span>Supports basic control flow and functions</span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+                        </button>   
+
                         
                         <!-- Project 3 -->
                         <button type="button" onclick="window.location.href='Drone.html'">
